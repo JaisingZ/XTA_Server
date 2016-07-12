@@ -25,7 +25,7 @@
         <module name="XTA" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
+    <bytecodeTargetLevel>
       <module name="XTA" target="1.8" />
     </bytecodeTargetLevel>
   </component>
