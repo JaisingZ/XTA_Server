@@ -18,7 +18,7 @@ public class GeTui {
     private static String masterSecret = "BS1qEODen97h8QyakUb2G8";
     private static String url = "http://sdk.open.api.igexin.com/apiex.htm";
 
-    public static void main(String[] args) throws IOException {
+    public void launch() throws IOException {
 
         IGtPush push = new IGtPush(url, appKey, masterSecret);
 
