@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import push.Demo;
-import push.GeTui;
 import test.model.Binding;
 import test.model.User;
 import test.model.Version;
@@ -306,12 +305,12 @@ public class HelloServlet extends HttpServlet {
 						json_return.put("bindList", json_list);
 						json_return.put("result", "1");
 						System.out.print(json_return);
-						GeTui geTui = new GeTui();
-						try {
-							geTui.launch();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+//						GeTui geTui = new GeTui();
+//						try {
+//							geTui.launch();
+//						} catch (IOException e) {
+//							e.printStackTrace();
+//						}
 
 
 						//demo.launch(json_return);
@@ -323,25 +322,28 @@ public class HelloServlet extends HttpServlet {
 				break;
 
 			/**
-			 * 返回绑定
+			 * 确认绑定
 			 */
-			case "bind_return":
-				json_return.put("type", "bind_return");
-				if (str_operation.equals("return")) {
-					json_return.put("operation", "return");
-					String str_return_id = request.getParameter("id");
-					String str_return_bindid = request.getParameter("bindid");
-					String str_return_content = request.getParameter("content");
-					String str_return_device_token = userService.getUser(str_return_bindid).getDevice_token();
+			case "bindConfirm":
+				json_return.put("type", "bindConfirm");
+				if (str_operation.equals("confirm")) {
+					json_return.put("operation", "confirm");
+					//被绑定人的id
+					//String str_confirm_id = request.getParameter("id");
+					//绑定人的id
+					//String str_confirm_bindid = request.getParameter("bindid");
+					//确认绑定结果
+//					String str_confirm_confirm = request.getParameter("result");
+					//String str_confirm_device_token = userService.getUser(str_confirm_bindid).getDevice_token();
 
-					json_return.put("id", str_return_id);
-					json_return.put("content", str_return_content);
-					json_return.put("device_token", str_return_device_token);
-					demo.launch(json_return);
+					//json_return.put("id", str_confirm_id);
+//					json_return.put("content", str_confirm_bindid);
+//					json_return.put("device_token", str_confirm_content);
+//					demo.launch(json_return);
 
-					json_return.put("result", "-2");
+					json_return.put("result", "1");
 				} else {
-					json_return.put("result", "-1");
+					json_return.put("result", "0");
 				}
 				break;
 		}
