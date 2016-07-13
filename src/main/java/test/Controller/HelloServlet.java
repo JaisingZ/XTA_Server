@@ -74,15 +74,8 @@ public class HelloServlet extends HttpServlet {
 
 
 
-		/**
-		 * 多用户要用这个！
-		 */
+		//存储每个用户上传的最新位置信息
 		Map<String, Map<String, Object>> map_last_location = new HashMap<>();
-		//上次更新位置时间
-		String g_str_last_time = null;
-		String g_str_last_space = null;
-		String g_str_last_lat = null;
-		String g_str_last_lot = null;
 
 		LocationService locationService = new LocationService();
 		String str_type = request.getParameter("type");
@@ -173,7 +166,7 @@ public class HelloServlet extends HttpServlet {
 							json_return.put("head_img", class_get_user.getHead_img());
 							json_return.put("device_token", class_get_user.getDevice_token());
 							json_return.put("result", "1");
-							demo.launch(json_return);
+							//demo.launch(json_return);
 							//是不是还要确认已经返回用户信息？
 						}
 					}
@@ -224,7 +217,7 @@ public class HelloServlet extends HttpServlet {
 							json_return.put("name", class_get_user.getName());
 							json_return.put("head_img", class_get_user.getHead_img());
 							json_return.put("result", "1");
-							demo.launch(json_return);
+							//demo.launch(json_return);
 							//是不是还要确认已经返回用户信息？
 						}
 					}
@@ -312,12 +305,12 @@ public class HelloServlet extends HttpServlet {
 						json_return.put("bindList", json_list);
 						json_return.put("result", "1");
 						System.out.print(json_return);
-						GeTui geTui = new GeTui();
-						try {
-							geTui.launch();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+//						GeTui geTui = new GeTui();
+//						try {
+//							geTui.launch();
+//						} catch (IOException e) {
+//							e.printStackTrace();
+//						}
 						//demo.launch(json_return);
 					}
 				} else {
@@ -372,9 +365,7 @@ public class HelloServlet extends HttpServlet {
 						map_temp.put("lat", str_add_lat);
 						map_temp.put("lot", str_add_lot);
 						map_temp.put("time", str_add_time);
-						for (Map.Entry entry : map_last_location.entrySet()) {
-
-						}
+						map_last_location.put(str_add_id, map_temp);
 
 						map_params.put("id", str_add_id);
 						map_params.put("space", str_add_space);
@@ -399,7 +390,25 @@ public class HelloServlet extends HttpServlet {
 			case "getCurrentLocation":
 				json_return.put("type", "getCurrentLocation");
 				if (str_operation.equals("get")) {
-
+					String str_get_id = request.getParameter("id");
+					if (str_get_id == null) {
+						json_return.put("result", "0");
+					} else {
+						boolean found_loc = false;
+						for (Map.Entry entry : map_last_location.entrySet()) {
+							//找到该位置，返回位置信息
+							if (str_get_id.equals(entry.getKey())) {
+								json_return.put("currentLocation", entry.getValue());
+								json_return.put("result", "1");
+								found_loc = true;
+								break;
+							}
+						}
+						//没有存储位置
+						if (!found_loc) {
+							json_return.put("result", "-2");
+						}
+					}
 				} else {
 					json_return.put("result", "0");
 				}
