@@ -45,6 +45,11 @@ public class HelloServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+
+		request.setCharacterEncoding("utf-8"); //编码方式设置和浏览器一样（还有常见的gbk、gb2312）
+		response.setContentType("charset=utf-8");
+
+
 		JSONObject json = new JSONObject();
 
 		try {
