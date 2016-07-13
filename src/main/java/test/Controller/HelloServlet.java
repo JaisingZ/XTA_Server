@@ -45,11 +45,6 @@ public class HelloServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
-		request.setCharacterEncoding("utf-8"); //编码方式设置和浏览器一样（还有常见的gbk、gb2312）
-		response.setContentType("charset=utf-8");
-
-
 		JSONObject json = new JSONObject();
 
 		try {
@@ -79,11 +74,6 @@ public class HelloServlet extends HttpServlet {
 		JSONObject json_return = new JSONObject();
 		//数据库操作参数列表
 		Map<String, Object> map_params = new HashMap<>();
-
-
-
-
-
 
 		String str_type = request.getParameter("type");
 		String str_operation = request.getParameter("operation");
@@ -486,7 +476,8 @@ public class HelloServlet extends HttpServlet {
 				break;
 
 			/**
-			 * 获取计划，保证每次最多只有一个计划在进行中
+			 * 获取计划
+			 * 一个人最多只能成为一个制定者，但可以成为多个被制定者
 			 */
 			case "getPlan":
 				map_params.clear();
@@ -500,37 +491,53 @@ public class HelloServlet extends HttpServlet {
 					} else {
 						String str_finish_time = class_get_plan.getTime_arrival();
 						Date current_date = new Date();
-						String str_current_time = String.valueOf(current_date.getTime());
-//						if (str_current_time - str_finish_time > 0) {
-
-//						}
+						//计划有效，返回
+						if (str_finish_time.compareTo(String.valueOf(current_date.getTime())) > 0) {
+							JSONObject json_temp = new JSONObject();
+							json_temp.put("id", class_get_plan.getId());
+							json_temp.put("bindid", class_get_plan.getBindid());
+							json_temp.put("space_start", class_get_plan.getSpace_start());
+							json_temp.put("space_arrival", class_get_plan.getSpace_arrival());
+							json_temp.put("lat_start", class_get_plan.getLat_start());
+							json_temp.put("lat_arrival", class_get_plan.getLat_arrival());
+							json_temp.put("lot_start", class_get_plan.getLot_start());
+							json_temp.put("lot_arrival", class_get_plan.getLot_arrival());
+							json_temp.put("time_start", class_get_plan.getTime_start());
+							json_temp.put("time_arrival", class_get_plan.getTime_arrival());
+							json_temp.put("remark", class_get_plan.getRemark());
+							json_temp.put("grade", class_get_plan.getGrade());
+							json_return.put("planInfo", json_temp);
+							//计划失效，从数据库中删除
+						} else {
+							planService.deletePlanById(str_get_id);
+							json_return.put("result", "-3");
+						}
 					}
-//					List<Plan> list_plan = planService.getPlanListById(str_get_id);
-//					if (list_plan == null) {
-//						json_return.put("result", "-2");
-//					} else {
-//						JSONObject json_temp = new JSONObject();
-//						JSONArray json_list = new JSONArray();
-//						for (Plan plan : list_plan) {
-//							Plan class_get_plan = planService.getPlanById(plan.getId());
-//							json_temp.put("id", class_get_plan.getId());
-//							json_temp.put("bindid", class_get_plan.getBindid());
-//							json_temp.put("space_start", class_get_plan.getSpace_start());
-//							json_temp.put("space_arrival", class_get_plan.getSpace_arrival());
-//							json_temp.put("lat_start", class_get_plan.getLat_start());
-//							json_temp.put("lat_arrival", class_get_plan.getLat_arrival());
-//							json_temp.put("lot_start", class_get_plan.getLot_start());
-//							json_temp.put("lot_arrival", class_get_plan.getLot_arrival());
-//							json_temp.put("time_start", class_get_plan.getTime_start());
-//							json_temp.put("time_arrival", class_get_plan.getTime_arrival());
-//							json_temp.put("remark", class_get_plan.getRemark());
-//							json_temp.put("grade", class_get_plan.getGrade());
-//							json_list.put(json_temp);
-//						}
-//						json_return.put("planList", json_list);
-//						json_return.put("result", "1");
-//						System.out.println(json_return);
-//					}
+				} else {
+					json_return.put("result", "0");
+				}
+				break;
+
+			/**
+			 * 取消计划（delete）
+			 */
+			case "cancelPlan":
+				map_params.clear();
+				json_return.put("type", "cancelPlan");
+				if (str_operation.equals("delete")) {
+					json_return.put("operation", "delete");
+					String str_delete_id = request.getParameter("id");
+					Plan class_delete_plan = planService.getPlanById(str_delete_id);
+					if (class_delete_plan == null) {
+						json_return.put("result", "1");
+					} else {
+						boolean result = planService.deletePlanById(str_delete_id);
+						if (result) {
+							json_return.put("result", "1");
+						} else {
+							json_return.put("result", "-1");
+						}
+					}
 				} else {
 					json_return.put("result", "0");
 				}

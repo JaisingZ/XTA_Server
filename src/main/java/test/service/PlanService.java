@@ -28,11 +28,10 @@ public class PlanService {
     }
 
     /**
-     * 根据id获得计划列表
+     * 根据id删除计划
      */
-    public List<Plan> getPlanListById(String id) {
-        String sql = "SELECT * FROM Plan WHERE id = ?";
-        return DatabaseHelper.queryEntityList(Plan.class, sql, id);
+    public boolean deletePlanById(String id) {
+        return DatabaseHelper.deleteEntity(Plan.class, "id", id);
     }
 
 }
