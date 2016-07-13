@@ -202,9 +202,16 @@ public class HelloServlet extends HttpServlet {
 							json_return.put("result", "-2");
 							//可以更新
 						} else {
+
 							map_params.put("id", str_update_id);
 							map_params.put("name", str_update_name);
 							map_params.put("head_img", str_update_head_img);
+							if (str_update_name == null) {
+								map_params.remove("name");
+							}
+							if (str_update_head_img == null) {
+								map_params.remove("head_img");
+							}
 							boolean register_result = userService.updateUser("id", str_update_id, map_params);
 							//更新成功
 							if (register_result) {
@@ -214,9 +221,7 @@ public class HelloServlet extends HttpServlet {
 								json_return.put("result", "-1");
 							}
 
-							json_return.put("id", str_update_id);
-							json_return.put("name", class_get_user.getName());
-							json_return.put("head_img", class_get_user.getHead_img());
+							json_return.put("updateInfo", map_params);
 							json_return.put("result", "1");
 							//demo.launch(json_return);
 							//是不是还要确认已经返回用户信息？

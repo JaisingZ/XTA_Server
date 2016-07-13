@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e8eb7f1-c38a-4643-b16c-c07ffae20e02" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/xta-1.0.0/WEB-INF/classes/test/Controller/HelloServlet.class" afterPath="$PROJECT_DIR$/target/xta-1.0.0/WEB-INF/classes/test/Controller/HelloServlet.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/xta-1.0.0/WEB-INF/classes/test/helper/DatabaseHelper.class" afterPath="$PROJECT_DIR$/target/xta-1.0.0/WEB-INF/classes/test/helper/DatabaseHelper.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/xta-1.0.0/WEB-INF/classes/test/service/UserService.class" afterPath="$PROJECT_DIR$/target/xta-1.0.0/WEB-INF/classes/test/service/UserService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/test/Controller/HelloServlet.java" afterPath="$PROJECT_DIR$/src/main/java/test/Controller/HelloServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/test/helper/DatabaseHelper.java" afterPath="$PROJECT_DIR$/src/main/java/test/helper/DatabaseHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/test/service/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/test/service/UserService.java" />
     </list>
     <ignored path="XTA_Server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,8 +32,8 @@
       <file leaf-file-name="HelloServlet.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/test/Controller/HelloServlet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="207" column="110" selection-start-line="207" selection-start-column="110" selection-end-line="207" selection-end-column="110" />
+            <state relative-caret-position="445">
+              <caret line="223" column="70" selection-start-line="223" selection-start-column="70" selection-end-line="223" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1013,12 +1014,12 @@
       <updated>1468335814339</updated>
       <workItem from="1468335820616" duration="5662000" />
       <workItem from="1468373220399" duration="9107000" />
-      <workItem from="1468388326488" duration="12234000" />
+      <workItem from="1468388326488" duration="12559000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27003000" />
+    <option name="totallyTimeSpent" value="27328000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -1026,7 +1027,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.044510387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.044510387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1381,8 +1382,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/test/Controller/HelloServlet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="207" column="110" selection-start-line="207" selection-start-column="110" selection-end-line="207" selection-end-column="110" />
+        <state relative-caret-position="445">
+          <caret line="223" column="70" selection-start-line="223" selection-start-column="70" selection-end-line="223" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
