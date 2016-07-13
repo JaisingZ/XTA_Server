@@ -2,6 +2,8 @@ package test.service;
 
 import test.helper.DatabaseHelper;
 import test.model.Location;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,6 +32,14 @@ public class LocationService {
     public Location getLocationByTime(String time) {
         String sql = "SELECT * FROM Location WHERE time = ?";
         return DatabaseHelper.queryEntity(Location.class, sql, time);
+    }
+
+    /**
+     * 根据id获得位置列表（历史位置）
+     */
+    public List<Location> getLocationListById(String id) {
+        String sql = "SELECT * FROM Location WHERE id = ?";
+        return DatabaseHelper.queryEntityList(Location.class, sql);
     }
 
 }

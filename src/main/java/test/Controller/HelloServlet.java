@@ -4,10 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import push.Demo;
-import test.model.Binding;
-import test.model.Plan;
-import test.model.User;
-import test.model.Version;
+import test.model.*;
 import test.service.*;
 
 import javax.servlet.ServletException;
@@ -536,6 +533,41 @@ public class HelloServlet extends HttpServlet {
 							json_return.put("result", "1");
 						} else {
 							json_return.put("result", "-1");
+						}
+					}
+				} else {
+					json_return.put("result", "0");
+				}
+				break;
+
+			/**
+			 * 获取历史位置
+			 */
+			case "getHistoryLocation":
+				json_return.put("type", "getHistoryLocation");
+				if (str_operation.equals("get")) {
+					json_return.put("operation", "get");
+					String str_get_id = request.getParameter("id");
+					if (str_get_id == null) {
+						json_return.put("result", "0");
+					} else {
+						List<Location> list_location = locationService.getLocationListById(str_get_id);
+						//没有历史位置
+						if (list_location == null) {
+							json_return.put("result", "-2");
+						} else {
+							JSONObject json_temp = new JSONObject();
+							JSONArray json_list = new JSONArray();
+							for (Location loc : list_location) {
+								Location class_get_location = locationService.getLocationById(loc.getId());
+								json_temp.put("space", class_get_location.getSpace());
+								json_temp.put("lat", class_get_location.getLat());
+								json_temp.put("lot", class_get_location.getLot());
+								json_temp.put("time", class_get_location.getTimestamp());
+								json_list.put(json_temp);
+							}
+							json_return.put("locationList", json_list);
+							json_return.put("result", "1");
 						}
 					}
 				} else {
