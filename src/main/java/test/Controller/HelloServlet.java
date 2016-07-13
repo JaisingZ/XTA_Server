@@ -5,12 +5,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import push.Demo;
 import test.model.Binding;
+import test.model.Plan;
 import test.model.User;
 import test.model.Version;
-import test.service.BindingService;
-import test.service.LocationService;
-import test.service.UserService;
-import test.service.VersionService;
+import test.service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,6 +36,7 @@ public class HelloServlet extends HttpServlet {
 	private UserService userService = new UserService();
 	private BindingService bindingService = new BindingService();
 	private LocationService locationService = new LocationService();
+	private PlanService planService = new PlanService();
 
 	//存储每个用户上传的最新位置信息
 	Map<String, Map<String, Object>> map_last_location = new HashMap<>();
@@ -206,7 +205,7 @@ public class HelloServlet extends HttpServlet {
 							map_params.put("id", str_update_id);
 							map_params.put("name", str_update_name);
 							map_params.put("head_img", str_update_head_img);
-							boolean register_result = userService.updateUser(str_update_id, map_params);
+							boolean register_result = userService.updateUser("id", map_params);
 							//更新成功
 							if (register_result) {
 								json_return.put("result", "1");
@@ -401,7 +400,6 @@ public class HelloServlet extends HttpServlet {
 						boolean found_loc = false;
 						for (Map.Entry entry : map_last_location.entrySet()) {
 							//找到该位置，返回位置信息
-							System.out.println("==================Here" + str_get_id + "   " + entry.getKey());
 							if (str_get_id.equals(entry.getKey().toString())) {
 								json_return.put("currentLocation", entry.getValue());
 								json_return.put("result", "1");
@@ -419,6 +417,83 @@ public class HelloServlet extends HttpServlet {
 					json_return.put("result", "0");
 				}
 				break;
+
+			/**
+			 * 制定计划
+			 */
+			case "makePlan":
+				map_params.clear();
+				json_return.put("type", "makeplan");
+				if (str_operation.equals("add")) {
+					String str_add_id = request.getParameter("id");
+					String str_add_bindid = request.getParameter("bindid");
+					String str_add_space_start = request.getParameter("space_start");
+					String str_add_space_arrival = request.getParameter("space_arrival");
+					String str_add_lat_start = request.getParameter("lat_start");
+					String str_add_lat_arrival = request.getParameter("lat_arrival");
+					String str_add_lot_start = request.getParameter("lot_start");
+					String str_add_lot_arrival = request.getParameter("lot_arrival");
+					String str_add_time_start = request.getParameter("time_start");
+					String str_add_time_arrival = request.getParameter("time_arrival");
+					String str_add_remark = request.getParameter("remark");
+					String str_add_grade = request.getParameter("grade");
+
+					if (str_add_id == null || str_add_bindid == null || str_add_space_start == null ||
+							str_add_space_arrival == null || str_add_lat_start == null || str_add_lat_arrival == null ||
+							str_add_lot_start == null || str_add_lot_arrival == null || str_add_time_start == null ||
+							str_add_time_arrival == null) {
+						json_return.put("result", "0");
+					} else {
+						User class_get_binduser = userService.getUser(str_add_bindid);
+						//需要被指定计划的人未注册
+						if (class_get_binduser == null) {
+							json_return.put("result", "-2");
+						} else {
+							map_params.put("id", str_add_id);
+							map_params.put("bindid", str_add_bindid);
+							map_params.put("space_start", str_add_space_start);
+							map_params.put("space_arrival", str_add_space_arrival);
+							map_params.put("lat_start", str_add_lat_start);
+							map_params.put("lat_arrival", str_add_lat_arrival);
+							map_params.put("lot_start", str_add_lot_start);
+							map_params.put("lot_arrival", str_add_lot_arrival);
+							map_params.put("time_start", str_add_time_start);
+							map_params.put("time_arrival", str_add_time_arrival);
+							map_params.put("remark", str_add_remark);
+							map_params.put("grade", str_add_grade);
+							boolean result = planService.createPlan(map_params);
+							if (result) {
+								json_return.put("result", "1");
+							} else {
+								json_return.put("result", 0);
+							}
+						}
+					}
+				} else {
+					json_return.put("result", "0");
+				}
+				break;
+
+			/**
+			 * 获取计划
+			 */
+			case "getPlan":
+				map_params.clear();
+				json_return.put("type", "getPlan");
+				if (str_operation.equals("get")) {
+					String str_get_id = request.getParameter("id");
+					List<Plan> list_plan = planService.getPlanById(str_get_id);
+					if (list_plan == null) {
+						json_return.put("result", "-2");
+					} else {
+
+					}
+
+				} else {
+					json_return.put("result", "0");
+				}
+				break;
+
 		}
 
 		return json_return;

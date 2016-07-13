@@ -1,9 +1,10 @@
 package test.model;
 
 /**
- * 位置类
- *
  * Created by Jaising on 2016/7/13.
+ *
+ * 位置类
+ * 注意：共用一张表时，id主键要忽略冲突
  */
 public class Location {
 

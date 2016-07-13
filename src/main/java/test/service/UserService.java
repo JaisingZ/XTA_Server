@@ -37,8 +37,8 @@ public class UserService {
     /**
      * 更新用户
      */
-    public boolean updateUser(String id, Map<String, Object> fieldMap) {
-        return DatabaseHelper.updateEntity(User.class, id, fieldMap);
+    public boolean updateUser(String str_by, Map<String, Object> fieldMap) {
+        return DatabaseHelper.updateEntity(User.class, str_by, fieldMap);
     }
 
     /**
