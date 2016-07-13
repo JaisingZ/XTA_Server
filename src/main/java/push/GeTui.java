@@ -11,14 +11,14 @@ import java.util.List;
 
 
 public class GeTui {
-
-    //定义常量, appId、appKey、masterSecret 采用本文档 "第二步 获取访问凭证 "中获得的应用配置
-    private static String appId = "zeK98ASy1qAyXSZlDqbpV9";
-    private static String appKey = "pIGvmqqmdG959bE2UZPhp2";
-    private static String masterSecret = "BS1qEODen97h8QyakUb2G8";
-    private static String url = "http://sdk.open.api.igexin.com/apiex.htm";
-
     public void launch() throws IOException {
+    //定义常量, appId、appKey、masterSecret 采用本文档 "第二步 获取访问凭证 "中获得的应用配置
+      String appId = "zeK98ASy1qAyXSZlDqbpV9";
+      String appKey = "pIGvmqqmdG959bE2UZPhp2";
+      String masterSecret = "BS1qEODen97h8QyakUb2G8";
+      String url = "http://sdk.open.api.igexin.com/apiex.htm";
+
+
 
         IGtPush push = new IGtPush(url, appKey, masterSecret);
 
