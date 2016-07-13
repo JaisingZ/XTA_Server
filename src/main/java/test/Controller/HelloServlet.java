@@ -9,6 +9,7 @@ import test.model.Binding;
 import test.model.User;
 import test.model.Version;
 import test.service.BindingService;
+import test.service.LocationService;
 import test.service.UserService;
 import test.service.VersionService;
 
@@ -70,6 +71,20 @@ public class HelloServlet extends HttpServlet {
 		JSONObject json_return = new JSONObject();
 		//数据库操作参数列表
 		Map<String, Object> map_params = new HashMap<>();
+
+
+
+		/**
+		 * 多用户要用这个！
+		 */
+		Map<String, Map<String, Object>> map_last_location = new HashMap<>();
+		//上次更新位置时间
+		String g_str_last_time = null;
+		String g_str_last_space = null;
+		String g_str_last_lat = null;
+		String g_str_last_lot = null;
+
+		LocationService locationService = new LocationService();
 		String str_type = request.getParameter("type");
 		String str_operation = request.getParameter("operation");
 
@@ -285,15 +300,6 @@ public class HelloServlet extends HttpServlet {
 						json_return.put("result", "-2");
 						//绑定列表不为空，可以返回绑定列表
 					} else {
-						/*JSONArray json_list = new JSONArray();
-						json_list.put(list_get);
-						json_return.put("bindList", json_list);
-						System.out.println(json_return);
-						json_return.put("bindList", list_get);
-						System.out.print(json_return);
-						json_return.put("result", "1");*/
-
-
 						JSONObject json_temp = new JSONObject();
 						JSONArray json_list = new JSONArray();
 						for (Binding binding : list_get) {
@@ -312,10 +318,7 @@ public class HelloServlet extends HttpServlet {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-
-
 						//demo.launch(json_return);
-
 					}
 				} else {
 					json_return.put("result", "0");
@@ -343,6 +346,60 @@ public class HelloServlet extends HttpServlet {
 //					demo.launch(json_return);
 
 					json_return.put("result", "1");
+				} else {
+					json_return.put("result", "0");
+				}
+				break;
+
+			/**
+			 * 发送当前位置
+			 */
+			case "sendLocation":
+				json_return.put("type", "sendLocation");
+				if (str_operation.equals("add")) {
+					json_return.put("operaion", "add");
+					String str_add_id = request.getParameter("id");
+					String str_add_space = request.getParameter("space");
+					String str_add_lat = request.getParameter("lat");
+					String str_add_lot = request.getParameter("lot");
+					String str_add_time = request.getParameter("time");
+					if (str_add_id == null || str_add_space == null || str_add_lat == null
+							|| str_add_lot == null || str_add_time == null) {
+						json_return.put("result", "0");
+					} else {
+						Map<String, Object> map_temp = new HashMap<>();
+						map_temp.put("space", str_add_space);
+						map_temp.put("lat", str_add_lat);
+						map_temp.put("lot", str_add_lot);
+						map_temp.put("time", str_add_time);
+						for (Map.Entry entry : map_last_location.entrySet()) {
+
+						}
+
+						map_params.put("id", str_add_id);
+						map_params.put("space", str_add_space);
+						map_params.put("lat", str_add_lat);
+						map_params.put("lot", str_add_lot);
+						map_params.put("time", str_add_time);
+						boolean result = locationService.createLocation(map_params);
+						if (result) {
+							json_return.put("result", "1");
+						} else {
+							json_return.put("result", "-1");
+						}
+					}
+				} else {
+					json_return.put("result", "0");
+				}
+				break;
+
+			/**
+			 * 获取用户当前位置
+			 */
+			case "getCurrentLocation":
+				json_return.put("type", "getCurrentLocation");
+				if (str_operation.equals("get")) {
+
 				} else {
 					json_return.put("result", "0");
 				}
