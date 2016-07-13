@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import push.Demo;
+import push.GeTui;
 import test.model.Binding;
 import test.model.User;
 import test.model.Version;
@@ -305,12 +306,12 @@ public class HelloServlet extends HttpServlet {
 						json_return.put("bindList", json_list);
 						json_return.put("result", "1");
 						System.out.print(json_return);
-//						GeTui geTui = new GeTui();
-//						try {
-//							geTui.launch();
-//						} catch (IOException e) {
-//							e.printStackTrace();
-//						}
+						GeTui geTui = new GeTui();
+						try {
+							geTui.launch();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 
 
 						//demo.launch(json_return);
