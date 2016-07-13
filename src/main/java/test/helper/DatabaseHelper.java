@@ -160,7 +160,7 @@ public final class DatabaseHelper {
     /**
      * 更新实体
      */
-    public static <T> boolean updateEntity(Class<T> entityClass, Object key, Map<String, Object> fieldMap) {
+    public static <T> boolean updateEntity(Class<T> entityClass, String key, Object value, Map<String, Object> fieldMap) {
         if (CollectionUtil.isEmpty(fieldMap)) {
             LOGGER.error("can not update entity: fieldMap is empty");
             return false;
@@ -174,11 +174,8 @@ public final class DatabaseHelper {
         sql += columns.substring(0, columns.lastIndexOf(", ")) + " WHERE " + key + " = ?";
 
         List<Object> paramList = new ArrayList<Object>();
-        for (Object fieldValue : fieldMap.values()) {
-            paramList.add(fieldValue);
-        }
-        //paramList.addAll(fieldMap.values());
-        //paramList.add(key);
+        paramList.addAll(fieldMap.values());
+        paramList.add(value);
         Object[] params = paramList.toArray();
 
         return executeUpdate(sql, params) == 1;

@@ -205,7 +205,7 @@ public class HelloServlet extends HttpServlet {
 							map_params.put("id", str_update_id);
 							map_params.put("name", str_update_name);
 							map_params.put("head_img", str_update_head_img);
-							boolean register_result = userService.updateUser("id", map_params);
+							boolean register_result = userService.updateUser("id", str_update_id, map_params);
 							//更新成功
 							if (register_result) {
 								json_return.put("result", "1");
