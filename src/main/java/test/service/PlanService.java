@@ -3,6 +3,7 @@ package test.service;
 import test.helper.DatabaseHelper;
 import test.model.Plan;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +20,17 @@ public class PlanService {
     }
 
     /**
-     * 根据id获得计划（列表）
+     * 根据id获得计划
      */
-    public List<Plan> getPlanById(String id) {
+    public Plan getPlanById(String id) {
+        String sql = "SELECT * FROM Plan WHERE id = ?";
+        return DatabaseHelper.queryEntity(Plan.class, sql, id);
+    }
+
+    /**
+     * 根据id获得计划列表
+     */
+    public List<Plan> getPlanListById(String id) {
         String sql = "SELECT * FROM Plan WHERE id = ?";
         return DatabaseHelper.queryEntityList(Plan.class, sql, id);
     }

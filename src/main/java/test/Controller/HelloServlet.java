@@ -468,6 +468,7 @@ public class HelloServlet extends HttpServlet {
 							map_params.put("grade", str_add_grade);
 							boolean result = planService.createPlan(map_params);
 							if (result) {
+								json_return.put("planInfo", map_params);
 								json_return.put("result", "1");
 							} else {
 								json_return.put("result", 0);
@@ -487,18 +488,35 @@ public class HelloServlet extends HttpServlet {
 				json_return.put("type", "getPlan");
 				if (str_operation.equals("get")) {
 					String str_get_id = request.getParameter("id");
-					List<Plan> list_plan = planService.getPlanById(str_get_id);
+					List<Plan> list_plan = planService.getPlanListById(str_get_id);
 					if (list_plan == null) {
 						json_return.put("result", "-2");
 					} else {
-
+						JSONObject json_temp = new JSONObject();
+						JSONArray json_list = new JSONArray();
+						for (Plan plan : list_plan) {
+							Plan class_get_plan = planService.getPlanById(plan.getId());
+							json_temp.put("id", class_get_plan.getId());
+							json_temp.put("bindid", class_get_plan.getBindid());
+							json_temp.put("space_start", class_get_plan.getSpace_start());
+							json_temp.put("space_arrival", class_get_plan.getSpace_arrival());
+							json_temp.put("lat_start", class_get_plan.getLat_start());
+							json_temp.put("lat_arrival", class_get_plan.getLat_arrival());
+							json_temp.put("lot_start", class_get_plan.getLot_start());
+							json_temp.put("lot_arrival", class_get_plan.getLot_arrival());
+							json_temp.put("time_start", class_get_plan.getTime_start());
+							json_temp.put("time_arrival", class_get_plan.getTime_arrival());
+							json_temp.put("remark", class_get_plan.getRemark());
+							json_temp.put("grade", class_get_plan.getGrade());
+							json_list.put(json_temp);
+						}
+						json_return.put("planList", json_list);
+						json_return.put("result", "1");
 					}
-
 				} else {
 					json_return.put("result", "0");
 				}
 				break;
-
 		}
 
 		return json_return;
