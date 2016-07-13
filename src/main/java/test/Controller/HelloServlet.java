@@ -310,7 +310,6 @@ public class HelloServlet extends HttpServlet {
 						}
 						json_return.put("bindList", json_list);
 						json_return.put("result", "1");
-						System.out.print(json_return);
 //						GeTui geTui = new GeTui();
 //						try {
 //							geTui.launch();
@@ -487,6 +486,7 @@ public class HelloServlet extends HttpServlet {
 				map_params.clear();
 				json_return.put("type", "getPlan");
 				if (str_operation.equals("get")) {
+					json_return.put("operation", "get");
 					String str_get_id = request.getParameter("id");
 					List<Plan> list_plan = planService.getPlanListById(str_get_id);
 					if (list_plan == null) {
@@ -512,6 +512,7 @@ public class HelloServlet extends HttpServlet {
 						}
 						json_return.put("planList", json_list);
 						json_return.put("result", "1");
+						System.out.println(json_return);
 					}
 				} else {
 					json_return.put("result", "0");
