@@ -37,6 +37,10 @@ public class HelloServlet extends HttpServlet {
 	private VersionService versionService = new VersionService();
 	private UserService userService = new UserService();
 	private BindingService bindingService = new BindingService();
+	private LocationService locationService = new LocationService();
+
+	//存储每个用户上传的最新位置信息
+	Map<String, Map<String, Object>> map_last_location = new HashMap<>();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -73,10 +77,9 @@ public class HelloServlet extends HttpServlet {
 
 
 
-		//存储每个用户上传的最新位置信息
-		Map<String, Map<String, Object>> map_last_location = new HashMap<>();
 
-		LocationService locationService = new LocationService();
+
+
 		String str_type = request.getParameter("type");
 		String str_operation = request.getParameter("operation");
 
@@ -365,6 +368,7 @@ public class HelloServlet extends HttpServlet {
 						map_temp.put("lot", str_add_lot);
 						map_temp.put("time", str_add_time);
 						map_last_location.put(str_add_id, map_temp);
+						System.out.println(map_last_location);
 
 						map_params.put("id", str_add_id);
 						map_params.put("space", str_add_space);
@@ -389,6 +393,7 @@ public class HelloServlet extends HttpServlet {
 			case "getCurrentLocation":
 				json_return.put("type", "getCurrentLocation");
 				if (str_operation.equals("get")) {
+					json_return.put("operation", "get");
 					String str_get_id = request.getParameter("id");
 					if (str_get_id == null) {
 						json_return.put("result", "0");
@@ -396,7 +401,8 @@ public class HelloServlet extends HttpServlet {
 						boolean found_loc = false;
 						for (Map.Entry entry : map_last_location.entrySet()) {
 							//找到该位置，返回位置信息
-							if (str_get_id.equals(entry.getKey())) {
+							System.out.println("==================Here" + str_get_id + "   " + entry.getKey());
+							if (str_get_id.equals(entry.getKey().toString())) {
 								json_return.put("currentLocation", entry.getValue());
 								json_return.put("result", "1");
 								found_loc = true;
@@ -408,6 +414,7 @@ public class HelloServlet extends HttpServlet {
 							json_return.put("result", "-2");
 						}
 					}
+					System.out.print(json_return);
 				} else {
 					json_return.put("result", "0");
 				}
