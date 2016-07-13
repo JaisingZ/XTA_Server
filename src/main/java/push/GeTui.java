@@ -1,15 +1,15 @@
-package push;
-
-import com.gexin.rp.sdk.base.IPushResult;
-import com.gexin.rp.sdk.base.impl.AppMessage;
-import com.gexin.rp.sdk.http.IGtPush;
-import com.gexin.rp.sdk.template.LinkTemplate;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-public class GeTui {
+//package push;
+//
+//import com.gexin.rp.sdk.base.IPushResult;
+//import com.gexin.rp.sdk.base.impl.AppMessage;
+//import com.gexin.rp.sdk.http.IGtPush;
+//import com.gexin.rp.sdk.template.LinkTemplate;
+//
+//import java.io.IOException;
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//public class GeTui {
 //  public void launch() throws IOException {
 //    //定义常量, appId、appKey、masterSecret 采用本文档 "第二步 获取访问凭证 "中获得的应用配置
 //    String appId = "zeK98ASy1qAyXSZlDqbpV9";
@@ -42,4 +42,4 @@ public class GeTui {
 //    IPushResult ret = push.pushMessageToApp(message);
 //    System.out.println(ret.getResponse().toString());
 //  }
-}
+//}

@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import push.Demo;
-import push.GeTui;
 import test.model.Binding;
 import test.model.User;
 import test.model.Version;
