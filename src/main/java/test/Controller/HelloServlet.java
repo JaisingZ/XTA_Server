@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +58,8 @@ public class HelloServlet extends HttpServlet {
 
 	}
 
-	private JSONObject handleRequest(HttpServletRequest request) throws JSONException {
+	private JSONObject handleRequest(HttpServletRequest request)
+			throws JSONException, UnsupportedEncodingException {
 
 		//初始化友盟推送服务端
 		String appkey = "5761689167e58e831f002f4d";
@@ -183,7 +185,10 @@ public class HelloServlet extends HttpServlet {
 					if (str_update_id == null) {
 						json_return.put("result", "0");
 					} else {
-						String str_update_name = request.getParameter("name");
+						String str_update_name2 = request.getParameter("name");
+						System.out.println("****************getParameter:" + str_update_name2);
+						String str_update_name = new String(str_update_name2.getBytes("ISO-8859-1"), "UTF-8");
+						System.out.println("****************encoding:" + str_update_name);
 						String str_update_head_img = request.getParameter("head_img");
 
 						class_get_user = userService.getUser(str_update_id);
