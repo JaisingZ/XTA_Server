@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8e8eb7f1-c38a-4643-b16c-c07ffae20e02" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/test/Controller/HelloServlet.class" afterPath="$PROJECT_DIR$/target/classes/test/Controller/HelloServlet.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/test/helper/DatabaseHelper.class" afterPath="$PROJECT_DIR$/target/classes/test/helper/DatabaseHelper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/xta-1.0.0/WEB-INF/classes/test/Controller/HelloServlet.class" afterPath="$PROJECT_DIR$/target/xta-1.0.0/WEB-INF/classes/test/Controller/HelloServlet.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/xta-1.0.0/WEB-INF/classes/test/helper/DatabaseHelper.class" afterPath="$PROJECT_DIR$/target/xta-1.0.0/WEB-INF/classes/test/helper/DatabaseHelper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/test/Controller/HelloServlet.java" afterPath="$PROJECT_DIR$/src/main/java/test/Controller/HelloServlet.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/test/helper/DatabaseHelper.java" afterPath="$PROJECT_DIR$/src/main/java/test/helper/DatabaseHelper.java" />
     </list>
     <ignored path="XTA_Server.iws" />
@@ -32,7 +26,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="HelloServlet.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HelloServlet.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/test/Controller/HelloServlet.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="867">
@@ -116,11 +110,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseHelper.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DatabaseHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/test/helper/DatabaseHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-640">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="500">
+              <caret line="43" column="8" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -168,8 +162,8 @@
         <option value="$PROJECT_DIR$/src/main/java/test/service/LocationService.java" />
         <option value="$PROJECT_DIR$/src/main/java/test/model/Location.java" />
         <option value="$PROJECT_DIR$/src/main/java/test/util/EncodingUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/test/helper/DatabaseHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/test/Controller/HelloServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/test/helper/DatabaseHelper.java" />
       </list>
     </option>
   </component>
@@ -1026,15 +1020,15 @@
       <workItem from="1468417588197" duration="8753000" />
       <workItem from="1468457470579" duration="6062000" />
       <workItem from="1468474719256" duration="5236000" />
-      <workItem from="1468509961842" duration="3507000" />
+      <workItem from="1468509961842" duration="3805000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53142000" />
+    <option name="totallyTimeSpent" value="53440000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1378" height="780" extended-state="1" />
+    <frame x="-8" y="-8" width="1378" height="780" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1503,14 +1497,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/test/helper/DatabaseHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-640">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/test/Controller/HelloServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="867">
@@ -1518,6 +1504,14 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/test/helper/DatabaseHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="43" column="8" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
