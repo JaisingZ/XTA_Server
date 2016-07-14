@@ -563,7 +563,7 @@ public class HelloServlet extends HttpServlet {
 								json_temp.put("space", class_get_location.getSpace());
 								json_temp.put("lat", class_get_location.getLat());
 								json_temp.put("lot", class_get_location.getLot());
-								json_temp.put("time", class_get_location.getTimestamp());
+								json_temp.put("time", class_get_location.getTime());
 								json_list.put(json_temp);
 							}
 							json_return.put("locationList", json_list);

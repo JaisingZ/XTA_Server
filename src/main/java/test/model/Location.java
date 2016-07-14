@@ -31,7 +31,7 @@ public class Location {
     /**
      * 时间戳
      */
-    private String timestamp;
+    private String time;
 
     public void setId(String id) {
         this.id = id;
@@ -65,11 +65,11 @@ public class Location {
         return lot;
     }
 
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public String getTimestamp() {
-        return timestamp;
+    public String getTime() {
+        return time;
     }
 }
