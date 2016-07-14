@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import push.Demo;
 import test.model.*;
 import test.service.*;
+import test.util.EncodingUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -188,10 +189,9 @@ public class HelloServlet extends HttpServlet {
 					if (str_update_id == null) {
 						json_return.put("result", "0");
 					} else {
-						String str_update_name2 = request.getParameter("name");
-						System.out.println("****************getParameter:" + str_update_name2);
-						String str_update_name = new String(str_update_name2.getBytes("ISO-8859-1"), "UTF-8");
-						System.out.println("****************encoding:" + str_update_name);
+						String str_update_name = EncodingUtil.strISO2UTF(request.getParameter("name"));
+//						String str_update_name2 = request.getParameter("name");
+//						String str_update_name = new String(str_update_name2.getBytes("ISO-8859-1"), "UTF-8");
 						String str_update_head_img = request.getParameter("head_img");
 
 						class_get_user = userService.getUser(str_update_id);
