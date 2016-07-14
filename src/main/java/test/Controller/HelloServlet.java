@@ -134,7 +134,7 @@ public class HelloServlet extends HttpServlet {
 					if (str_get_id == null) {
 						json_return.put("result", "0");
 					} else {
-						String str_get_name = request.getParameter("name");
+						String str_get_name = EncodingUtil.strISO2UTF(request.getParameter("name"));
 						String str_get_head_img = request.getParameter("head_img");
 						String str_get_device_token = request.getParameter("device_token");
 
@@ -190,8 +190,6 @@ public class HelloServlet extends HttpServlet {
 						json_return.put("result", "0");
 					} else {
 						String str_update_name = EncodingUtil.strISO2UTF(request.getParameter("name"));
-//						String str_update_name2 = request.getParameter("name");
-//						String str_update_name = new String(str_update_name2.getBytes("ISO-8859-1"), "UTF-8");
 						String str_update_head_img = request.getParameter("head_img");
 
 						class_get_user = userService.getUser(str_update_id);
@@ -358,7 +356,7 @@ public class HelloServlet extends HttpServlet {
 				if (str_operation.equals("add")) {
 					json_return.put("operaion", "add");
 					String str_add_id = request.getParameter("id");
-					String str_add_space = request.getParameter("space");
+					String str_add_space = EncodingUtil.strISO2UTF(request.getParameter("space"));
 					String str_add_lat = request.getParameter("lat");
 					String str_add_lot = request.getParameter("lot");
 					String str_add_time = request.getParameter("time");
@@ -432,15 +430,15 @@ public class HelloServlet extends HttpServlet {
 				if (str_operation.equals("add")) {
 					String str_add_id = request.getParameter("id");
 					String str_add_bindid = request.getParameter("bindid");
-					String str_add_space_start = request.getParameter("space_start");
-					String str_add_space_arrival = request.getParameter("space_arrival");
+					String str_add_space_start = EncodingUtil.strISO2UTF(request.getParameter("space_start"));
+					String str_add_space_arrival = EncodingUtil.strISO2UTF(request.getParameter("space_arrival"));
 					String str_add_lat_start = request.getParameter("lat_start");
 					String str_add_lat_arrival = request.getParameter("lat_arrival");
 					String str_add_lot_start = request.getParameter("lot_start");
 					String str_add_lot_arrival = request.getParameter("lot_arrival");
 					String str_add_time_start = request.getParameter("time_start");
 					String str_add_time_arrival = request.getParameter("time_arrival");
-					String str_add_remark = request.getParameter("remark");
+					String str_add_remark = EncodingUtil.strISO2UTF(request.getParameter("remark"));
 					String str_add_grade = request.getParameter("grade");
 
 					if (str_add_id == null || str_add_bindid == null || str_add_space_start == null ||
@@ -584,9 +582,7 @@ public class HelloServlet extends HttpServlet {
 				}
 				break;
 		}
-
 		return json_return;
-
 	}
 
 	private void handleResponse(HttpServletResponse response) {
