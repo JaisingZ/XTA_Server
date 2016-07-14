@@ -448,7 +448,7 @@ public class HelloServlet extends HttpServlet {
 						json_return.put("result", "0");
 					} else {
 						User class_get_binduser = userService.getUser(str_add_bindid);
-						//需要被指定计划的人未注册
+						//被指定计划的人未注册
 						if (class_get_binduser == null) {
 							json_return.put("result", "-2");
 						} else {
