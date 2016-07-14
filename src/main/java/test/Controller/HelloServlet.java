@@ -504,6 +504,7 @@ public class HelloServlet extends HttpServlet {
 							json_temp.put("remark", class_get_plan.getRemark());
 							json_temp.put("grade", class_get_plan.getGrade());
 							json_return.put("planInfo", json_temp);
+							json_return.put("result", "1");
 							//计划失效，从数据库中删除
 						} else {
 							planService.deletePlanById(str_get_id);
