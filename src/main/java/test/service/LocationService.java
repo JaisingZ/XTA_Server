@@ -39,7 +39,7 @@ public class LocationService {
      */
     public List<Location> getLocationListById(String id) {
         String sql = "SELECT * FROM Location WHERE id = ?";
-        return DatabaseHelper.queryEntityList(Location.class, sql);
+        return DatabaseHelper.queryEntityList(Location.class, sql, id);
     }
 
 }

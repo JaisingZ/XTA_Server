@@ -17,7 +17,7 @@ public class BindingService {
     }
 
     /**
-     * 获得绑定信息
+     * 获得绑定列表
      */
     public List<Binding> getBinding(String id) {
         String sql = "SELECT * FROM Binding WHERE id = ?";
