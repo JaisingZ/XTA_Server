@@ -39,9 +39,9 @@ public final class DatabaseHelper {
         QUERY_RUNNER = new QueryRunner();
 
         //本地
-        //Properties conf = PropsUtil.loadProps("config_local.properties");
+        Properties conf = PropsUtil.loadProps("config_local.properties");
         //公网
-        Properties conf = PropsUtil.loadProps("config_remote.properties");
+        //Properties conf = PropsUtil.loadProps("config_remote.properties");
         String driver = conf.getProperty("jdbc.driver");
         String url = conf.getProperty("jdbc.url");
         String username = conf.getProperty("jdbc.username");

@@ -298,9 +298,10 @@ public class HelloServlet extends HttpServlet {
 						json_return.put("result", "-2");
 						//绑定列表不为空，可以返回绑定列表
 					} else {
-						JSONObject json_temp = new JSONObject();
+						JSONObject json_temp = null;
 						JSONArray json_list = new JSONArray();
 						for (Binding binding : list_get) {
+							json_temp = new JSONObject();
 							User class_bind_user = userService.getUser(binding.getBindid());
 							json_temp.put("id", class_bind_user.getId());
 							json_temp.put("name", class_bind_user.getName());
@@ -370,7 +371,6 @@ public class HelloServlet extends HttpServlet {
 						map_temp.put("lot", str_add_lot);
 						map_temp.put("time", str_add_time);
 						map_last_location.put(str_add_id, map_temp);
-						System.out.println(map_last_location);
 
 						map_params.put("id", str_add_id);
 						map_params.put("space", str_add_space);
@@ -563,14 +563,14 @@ public class HelloServlet extends HttpServlet {
 						if (list_location == null) {
 							json_return.put("result", "-2");
 						} else {
-							JSONObject json_temp = new JSONObject();
+							JSONObject json_temp = null;
 							JSONArray json_list = new JSONArray();
 							for (Location loc : list_location) {
-								Location class_get_location = locationService.getLocationById(loc.getId());
-								json_temp.put("space", class_get_location.getSpace());
-								json_temp.put("lat", class_get_location.getLat());
-								json_temp.put("lot", class_get_location.getLot());
-								json_temp.put("time", class_get_location.getTime());
+								json_temp = new JSONObject();
+								json_temp.put("space", loc.getSpace());
+								json_temp.put("lat", loc.getLat());
+								json_temp.put("lot", loc.getLot());
+								json_temp.put("time", loc.getTime());
 								json_list.put(json_temp);
 							}
 							json_return.put("locationList", json_list);
