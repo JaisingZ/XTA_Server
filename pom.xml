@@ -7,10 +7,7 @@
     <groupId>com.jaising.nuaa</groupId>
     <artifactId>xta</artifactId>
     <version>1.0.0</version>
-    <packaging>jar</packaging>
-
-    <name>test</name>
-    <url>http://maven.apache.org</url>
+    <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -95,24 +92,24 @@
             <version>4.3.5</version>
         </dependency>
         <!-- push -->
-        <dependency>
-            <groupId>com.gexin.platform</groupId>
-            <artifactId>gexin-rp-sdk-http</artifactId>
-            <version>4.0.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.gexin.platform</groupId>
-            <artifactId>gexin-rp-sdk-template</artifactId>
-            <version>4.0.0.5</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.gexin.platform</groupId>-->
+            <!--<artifactId>gexin-rp-sdk-http</artifactId>-->
+            <!--<version>4.0.1.2</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.gexin.platform</groupId>-->
+            <!--<artifactId>gexin-rp-sdk-template</artifactId>-->
+            <!--<version>4.0.0.5</version>-->
+        <!--</dependency>-->
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>getui-nexus</id>
-            <url>http://mvn.gt.igexin.com/nexus/content/repositories/releases/</url>
-        </repository>
-    </repositories>
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>getui-nexus</id>-->
+            <!--<url>http://mvn.gt.igexin.com/nexus/content/repositories/releases/</url>-->
+        <!--</repository>-->
+    <!--</repositories>-->
 
     <build>
         <plugins>
