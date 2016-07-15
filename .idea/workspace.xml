@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8e8eb7f1-c38a-4643-b16c-c07ffae20e02" name="Default" comment="" />
+    <list default="true" id="8e8eb7f1-c38a-4643-b16c-c07ffae20e02" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_gexin_platform_gexin_rp_sdk_base_4_0_0_7.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_gexin_platform_gexin_rp_sdk_http_4_0_1_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_gexin_platform_gexin_rp_sdk_template_4_0_0_5.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_2_5_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jackson_jackson_all_1_8_5.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/XTA_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/XTA_war_exploded.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XTA.iml" afterPath="$PROJECT_DIR$/XTA.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+    </list>
     <ignored path="XTA_Server.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -57,8 +67,8 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1760">
-              <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+            <state relative-caret-position="340">
+              <caret line="119" column="21" selection-start-line="119" selection-start-column="21" selection-end-line="119" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -158,9 +168,9 @@
         <option value="$PROJECT_DIR$/src/main/java/test/helper/DatabaseHelper.java" />
         <option value="$PROJECT_DIR$/src/main/java/test/Controller/HelloServlet.java" />
         <option value="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3/conf/settings.xml" />
         <option value="$PROJECT_DIR$/src/main/java/push/GeTui.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -968,12 +978,12 @@
       <workItem from="1468509961842" duration="7155000" />
       <workItem from="1468548161707" duration="7830000" />
       <workItem from="1468561412719" duration="916000" />
-      <workItem from="1468569013561" duration="576000" />
+      <workItem from="1468569013561" duration="1447000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66112000" />
+    <option name="totallyTimeSpent" value="66983000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1378" height="780" extended-state="0" />
@@ -1418,8 +1428,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1760">
-          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+        <state relative-caret-position="340">
+          <caret line="119" column="21" selection-start-line="119" selection-start-column="21" selection-end-line="119" selection-end-column="21" />
           <folding />
         </state>
       </provider>
