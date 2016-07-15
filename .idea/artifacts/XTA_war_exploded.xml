@@ -22,7 +22,8 @@
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.3.5" />
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.3.2" />
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.6" />
-          <element id="library" level="project" name="Maven: com.baidu.yun:bccs-api:3.0.1" />
+          <element id="library" level="project" name="Maven: com.gexin.platform:gexin-rp-sdk-http:4.0.1.2" />
+          <element id="library" level="project" name="Maven: com.gexin.platform:gexin-rp-sdk-template:4.0.0.5" />
         </element>
       </element>
       <element id="directory" name="META-INF">

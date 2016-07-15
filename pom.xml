@@ -91,32 +91,26 @@
             <artifactId>httpclient</artifactId>
             <version>4.3.5</version>
         </dependency>
-        <!-- push -->
-        <!--<dependency>-->
-        <!--<groupId>com.gexin.platform</groupId>-->
-        <!--<artifactId>gexin-rp-sdk-http</artifactId>-->
-        <!--<version>4.0.1.2</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.gexin.platform</groupId>-->
-        <!--<artifactId>gexin-rp-sdk-template</artifactId>-->
-        <!--<version>4.0.0.5</version>-->
-        <!--</dependency>-->
-
-        <!-- Baidu Push -->
+         <!--push-->
         <dependency>
-            <groupId>com.baidu.yun</groupId>
-            <artifactId>bccs-api</artifactId>
-            <version>3.0.1</version>
+        <groupId>com.gexin.platform</groupId>
+        <artifactId>gexin-rp-sdk-http</artifactId>
+        <version>4.0.1.2</version>
         </dependency>
+        <dependency>
+        <groupId>com.gexin.platform</groupId>
+        <artifactId>gexin-rp-sdk-template</artifactId>
+        <version>4.0.0.5</version>
+        </dependency>
+
+        <!--&lt;!&ndash; Baidu Push &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.baidu.yun</groupId>-->
+            <!--<artifactId>bccs-api</artifactId>-->
+            <!--<version>3.0.1</version>-->
+        <!--</dependency>-->
     </dependencies>
 
-    <!--<repositories>-->
-    <!--<repository>-->
-    <!--<id>getui-nexus</id>-->
-    <!--<url>http://mvn.gt.igexin.com/nexus/content/repositories/releases/</url>-->
-    <!--</repository>-->
-    <!--</repositories>-->
 
     <build>
         <plugins>
