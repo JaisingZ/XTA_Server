@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import push.Demo;
+import push.JPush;
 import test.model.*;
 import test.service.*;
 import test.util.EncodingUtil;
@@ -65,13 +66,10 @@ public class HelloServlet extends HttpServlet {
 	private JSONObject handleRequest(HttpServletRequest request)
 			throws JSONException, UnsupportedEncodingException {
 
-		//初始化友盟推送服务端
-		String appkey = "5761689167e58e831f002f4d";
-		String masterkey = "xp9sdk7evxrsnesxyo4onjovesy7tljl";
-		//String appkey = "575b8327e0f55aee8a00175f";
-		//String masterkey = "u2egxr6gbzfux3lp5zgptj2ftz8fxmu3";
+		//JPush
+		JPush jpush = new JPush();
+		jpush.launch();
 
-		Demo demo = new Demo(appkey, masterkey);
 
 		//返回的json对象
 		JSONObject json_return = new JSONObject();
@@ -264,7 +262,6 @@ public class HelloServlet extends HttpServlet {
 								json_return.put("id", str_add_id);
 								json_return.put("bindid", str_add_bindid);
 								json_return.put("device_token", str_add_device_token);
-								demo.launch(json_return);
 
 								boolean bind_result = bindingService.createBinding(map_params);
 								//绑定成功
