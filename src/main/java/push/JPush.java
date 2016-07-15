@@ -3,6 +3,8 @@ package push;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,98 +33,55 @@ public class JPush {
 	private static final String appKey ="3f3fd40ab7eab687e5087ede";
 	private static final String masterSecret = "f086d504b08929a3ddcfe199";
 	
-	public static final String TITLE = "Test from API example";
-    public static final String ALERT = "Test from API Example - alert";
-    public static final String MSG_CONTENT = "Test from API Example - msgContent";
-    public static final String REGISTRATION_ID = "0900e8d85ef";
-    public static final String TAG = "tag_api";
+	public static String TITLE = "";
+    public static String ALERT = "";
+    public static String MSG_CONTENT = "";
+    public static String DEVICE_TOKEN = "";
+    public static String TAG = "";
 
-	public static void launch() {
-//        testSendPushWithCustomConfig();
-//        testSendIosAlert();
-		testSendPush();
-	}
-
-
-    public static void main(String[] args) {
-//		testDefaultClient();
-//		testCustomClient();
-//		testCustomPushClient();
+	public static void launch(JSONObject jsonObject) {
+        handleJson(jsonObject);
+        buildPushObject_android_tag_alertWithTitle();
     }
 
-    public static void testDefaultClient() {
-        JPushClient client = new JPushClient(masterSecret, appKey);
-
-        //	JPushClient client1 = new JPushClient(masterSecret, appKey, null, ClientConfig.getInstance());
+    private static void handleJson(JSONObject jsonObject) {
+        try {
+            TITLE = String.valueOf(jsonObject.get("title"));
+            MSG_CONTENT = String.valueOf(jsonObject.get("msg"));
+            DEVICE_TOKEN = String.valueOf(jsonObject.get("device_token"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void testCustomClient() {
-        ClientConfig config = ClientConfig.getInstance();
-        config.setMaxRetryTimes(5);
-        config.setConnectionTimeout(10 * 1000);	// 10 seconds
-        config.setSSLVersion("TLSv1.1");		// JPush server supports SSLv3, TLSv1, TLSv1.1, TLSv1.2
-
-        JPushClient jPushClient = new JPushClient(masterSecret, appKey, null, config);
-    }
-
-    public static void testCustomPushClient() {
-        ClientConfig config = ClientConfig.getInstance();
-
-        config.setApnsProduction(false); 	// development env
-        config.setTimeToLive(60 * 60 * 24); // one day
-
-        //	config.setGlobalPushSetting(false, 60 * 60 * 24); // development env, one day
-
-        JPushClient jPushClient = new JPushClient(masterSecret, appKey, null, config); 	// JPush client
-
-        //	PushClient pushClient = new PushClient(masterSecret, appKey, null, config); 	// push client only
-
+    public static PushPayload buildPushObject_android_tag_alertWithTitle() {
+        return PushPayload.newBuilder()
+                .setPlatform(Platform.android())
+                .setAudience(Audience.registrationId(DEVICE_TOKEN))
+                .setNotification(Notification.android(MSG_CONTENT, TITLE, null))
+                .build();
     }
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	
-	public static void testSendPush() {
+    public static void testSendPush() {
 	    // HttpProxy proxy = new HttpProxy("localhost", 3128);
 	    // Can use this https proxy: https://github.com/Exa-Networks/exaproxy
 
         ClientConfig clientConfig = ClientConfig.getInstance();
         JPushClient jpushClient = new JPushClient(masterSecret, appKey, null, clientConfig);
-//        JPushClient jPushClient = new JPushClient(masterSecret, appKey, 0);
 
         // For push, all you need do is to build PushPayload object.
         PushPayload payload = buildPushObject_all_all_alert();
-        
+
         try {
             PushResult result = jpushClient.sendPush(payload);
             LOG.info("Got result - " + result);
-            
+
         } catch (APIConnectionException e) {
             LOG.error("Connection error. Should retry later. ", e);
-            
+
         } catch (APIRequestException e) {
             LOG.error("Error response from JPush server. Should review and fix it. ", e);
             LOG.info("HTTP Status: " + e.getStatus());
@@ -131,11 +90,11 @@ public class JPush {
             LOG.info("Msg ID: " + e.getMsgId());
         }
 	}
-	
+
 	public static PushPayload buildPushObject_all_all_alert() {
 	    return PushPayload.alertAll(ALERT);
 	}
-	
+
     public static PushPayload buildPushObject_all_alias_alert() {
         return PushPayload.newBuilder()
                 .setPlatform(Platform.all())
@@ -143,15 +102,7 @@ public class JPush {
                 .setNotification(Notification.alert(ALERT))
                 .build();
     }
-    
-    public static PushPayload buildPushObject_android_tag_alertWithTitle() {
-        return PushPayload.newBuilder()
-                .setPlatform(Platform.android())
-                .setAudience(Audience.tag("tag1"))
-                .setNotification(Notification.android(ALERT, TITLE, null))
-                .build();
-    }
-    
+
     public static PushPayload buildPushObject_android_and_ios() {
         return PushPayload.newBuilder()
                 .setPlatform(Platform.android_ios())

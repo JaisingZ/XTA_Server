@@ -8,6 +8,7 @@ import push.JPush;
 import test.model.*;
 import test.service.*;
 import test.util.EncodingUtil;
+import test.util.StringUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -66,11 +67,6 @@ public class HelloServlet extends HttpServlet {
 	private JSONObject handleRequest(HttpServletRequest request)
 			throws JSONException, UnsupportedEncodingException {
 
-		//JPush
-		JPush jpush = new JPush();
-		jpush.launch();
-
-
 		//返回的json对象
 		JSONObject json_return = new JSONObject();
 		//数据库操作参数列表
@@ -85,7 +81,7 @@ public class HelloServlet extends HttpServlet {
 			 * 版本信息
 			 */
 			case "version":
-				Version class_get_version;
+				Version class_get_version = null;
 				map_params.clear();
 				json_return.put("type", "version");
 				switch (str_operation) {
@@ -122,14 +118,14 @@ public class HelloServlet extends HttpServlet {
 			 * 获取用户信息
 			 */
 			case "getUserInfo":
-				User class_get_user;
+				User class_get_user = null;
 				map_params.clear();
 				json_return.put("type", "getUserInfo");
 				if (str_operation.equals("get")) {
 					json_return.put("operation", "get");
 					String str_get_id = request.getParameter("id");
 					//没有id，非法请求
-					if (str_get_id == null) {
+					if (StringUtil.isEmpty(str_get_id)) {
 						json_return.put("result", "0");
 					} else {
 						String str_get_name = EncodingUtil.strISO2UTF(request.getParameter("name"));
@@ -138,9 +134,9 @@ public class HelloServlet extends HttpServlet {
 
 						class_get_user = userService.getUser(str_get_id);
 						//不存在该用户，看是否可以注册
-						if (class_get_user == null) {
+						if (class_get_user == null ) {
 							//没有device_token一定不能注册，非法请求
-							if (str_get_device_token == null) {
+							if (StringUtil.isEmpty(str_get_device_token)) {
 								json_return.put("result", "0");
 								//有device_token可以注册
 							} else {
@@ -164,7 +160,6 @@ public class HelloServlet extends HttpServlet {
 							json_return.put("head_img", class_get_user.getHead_img());
 							json_return.put("device_token", class_get_user.getDevice_token());
 							json_return.put("result", "1");
-							//demo.launch(json_return);
 							//是不是还要确认已经返回用户信息？
 						}
 					}
@@ -184,7 +179,7 @@ public class HelloServlet extends HttpServlet {
 					json_return.put("operation", "update");
 					String str_update_id = request.getParameter("id");
 					//没有id，非法请求
-					if (str_update_id == null) {
+					if (StringUtil.isEmpty(str_update_id)) {
 						json_return.put("result", "0");
 					} else {
 						String str_update_name = EncodingUtil.strISO2UTF(request.getParameter("name"));
@@ -195,18 +190,17 @@ public class HelloServlet extends HttpServlet {
 						if (class_get_user == null) {
 							json_return.put("result", "-1");
 							//用户存在但是没有更新信息，不更新
-						} else if (str_update_name == null && str_update_head_img == null) {
+						} else if (StringUtil.isEmpty(str_update_name) && StringUtil.isEmpty(str_update_head_img)) {
 							json_return.put("result", "-2");
 							//可以更新
 						} else {
-
 							map_params.put("id", str_update_id);
 							map_params.put("name", str_update_name);
 							map_params.put("head_img", str_update_head_img);
-							if (str_update_name == null) {
+							if (StringUtil.isEmpty(str_update_name)) {
 								map_params.remove("name");
 							}
-							if (str_update_head_img == null) {
+							if (StringUtil.isEmpty(str_update_head_img)) {
 								map_params.remove("head_img");
 							}
 							boolean register_result = userService.updateUser("id", str_update_id, map_params);
@@ -217,10 +211,8 @@ public class HelloServlet extends HttpServlet {
 							} else {
 								json_return.put("result", "-1");
 							}
-
 							json_return.put("updateInfo", map_params);
 							json_return.put("result", "1");
-							//demo.launch(json_return);
 							//是不是还要确认已经返回用户信息？
 						}
 					}
@@ -240,7 +232,7 @@ public class HelloServlet extends HttpServlet {
 					json_return.put("operation", "add");
 					String str_add_bindid = request.getParameter("bindid");
 					//参数不足，非法请求
-					if (str_add_bindid == null) {
+					if (StringUtil.isEmpty(str_add_bindid)) {
 						json_return.put("result", "0");
 					} else {
 						class_get_user = userService.getUser(str_add_bindid);
@@ -250,10 +242,9 @@ public class HelloServlet extends HttpServlet {
 						} else {
 							String str_add_device_token = class_get_user.getDevice_token();
 							String str_add_id = request.getParameter("id");
-							//被绑定用户没有注册，不能绑定
-							if (str_add_id == null) {
+							//参数不足，非法请求
+							if (StringUtil.isEmpty(str_add_id)) {
 								json_return.put("result", "0");
-
 								//可以绑定
 							} else {
 								map_params.put("id", str_add_id);
@@ -266,6 +257,13 @@ public class HelloServlet extends HttpServlet {
 								boolean bind_result = bindingService.createBinding(map_params);
 								//绑定成功
 								if (bind_result) {
+									//推送到被绑定人设备上
+									JSONObject json_push = new JSONObject();
+									json_push.put("title", "寻ta有人想和你绑定");
+									json_push.put("msg", str_add_id + "请求和你绑定");
+									json_push.put("device_token", str_add_device_token);
+									JPush.launch(json_push);
+
 									json_return.put("result", "1");
 									//数据库操作失败，绑定失败
 								} else {
@@ -307,13 +305,6 @@ public class HelloServlet extends HttpServlet {
 						}
 						json_return.put("bindList", json_list);
 						json_return.put("result", "1");
-//						GeTui geTui = new GeTui();
-//						try {
-//							geTui.launch();
-//						} catch (IOException e) {
-//							e.printStackTrace();
-//						}
-						//demo.launch(json_return);
 					}
 				} else {
 					json_return.put("result", "0");
@@ -328,19 +319,47 @@ public class HelloServlet extends HttpServlet {
 				if (str_operation.equals("confirm")) {
 					json_return.put("operation", "confirm");
 					//被绑定人的id
-					//String str_confirm_id = request.getParameter("id");
+					String str_confirm_id = request.getParameter("id");
 					//绑定人的id
-					//String str_confirm_bindid = request.getParameter("bindid");
+					String str_confirm_bindid = request.getParameter("bindid");
 					//确认绑定结果
-//					String str_confirm_confirm = request.getParameter("result");
-					//String str_confirm_device_token = userService.getUser(str_confirm_bindid).getDevice_token();
+					String str_confirm_agree = request.getParameter("agree");
 
-					//json_return.put("id", str_confirm_id);
-//					json_return.put("content", str_confirm_bindid);
-//					json_return.put("device_token", str_confirm_content);
-//					demo.launch(json_return);
+					class_get_user = userService.getUser(str_confirm_id);
+					String str_confirm_name = class_get_user.getName();
 
-					json_return.put("result", "1");
+					class_get_user = userService.getUser(str_confirm_bindid);
+					String str_confirm_device_token = class_get_user.getDevice_token();
+
+					JSONObject json_push = new JSONObject();
+					json_push.put("title", "寻ta绑定结果");
+					json_push.put("device_token", str_confirm_device_token);
+					if (str_confirm_agree.equals("1")) {
+						json_return.put("result", "1");
+
+						json_push.put("msg", str_confirm_id + "同意和你绑定");
+						//返回被绑定人的昵称和位置
+						json_push.put("name", str_confirm_name);
+						boolean found_loc = false;
+						for (Map.Entry entry : map_last_location.entrySet()) {
+							//找到该位置，返回位置信息
+							if (str_confirm_id.equals(entry.getKey().toString())) {
+								json_push.put("location", entry.getValue());
+								json_push.put("result", "1");
+								found_loc = true;
+								break;
+							}
+						}
+						//没有存储位置
+						if (!found_loc) {
+							json_push.put("result", "-2");
+						}
+
+					} else {
+						json_return.put("result", "2");
+						json_push.put("msg", str_confirm_id + "不想和你绑定");
+					}
+					JPush.launch(json_push);
 				} else {
 					json_return.put("result", "0");
 				}
