@@ -91,6 +91,8 @@
             <artifactId>httpclient</artifactId>
             <version>4.3.5</version>
         </dependency>
+
+
         <!--&lt;!&ndash; GeTui Push&ndash;&gt;-->
         <!--<dependency>-->
             <!--<groupId>com.gexin.platform</groupId>-->
@@ -103,12 +105,20 @@
             <!--<version>4.0.0.5</version>-->
         <!--</dependency>-->
 
-        <!-- Baidu Push -->
+        <!--&lt;!&ndash; Baidu Push &ndash;&gt;-->
+        <!--<dependency>-->
+        <!--<groupId>com.baidu.yun</groupId>-->
+        <!--<artifactId>bccs-api</artifactId>-->
+        <!--<version>3.0.1</version>-->
+        <!--</dependency>-->
+
+        <!-- JPush -->
         <dependency>
-        <groupId>com.baidu.yun</groupId>
-        <artifactId>bccs-api</artifactId>
-        <version>3.0.1</version>
+            <groupId>cn.jpush.api</groupId>
+            <artifactId>jpush-client</artifactId>
+            <version>3.2.9</version>
         </dependency>
+
     </dependencies>
 
     <!--<repositories>-->
