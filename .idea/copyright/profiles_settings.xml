@@ -1,3 +1,11 @@
 <component name="CopyrightManager">
   <settings default="" />
+  <mirrors>
+    <!-- mirror | Specifies a repository mirror site to use instead of a given 		repository. The repository that | this mirror serves has an ID that matches 		the mirrorOf element of this mirror. IDs are used | for inheritance and direct 		lookup purposes, and must be unique across the set of mirrors. | -->
+    <mirror>
+      <id>nexus-osc</id>
+      <mirrorOf>*</mirrorOf>
+      <name>Nexus osc</name>
+      <url>http://maven.oschina.net/content/groups/public/</url>
+    </mirror></mirrors>
 </component>
