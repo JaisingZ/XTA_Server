@@ -259,9 +259,9 @@ public class HelloServlet extends HttpServlet {
 								if (bind_result) {
 									//推送到被绑定人设备上
 									JSONObject json_push = new JSONObject();
-									json_push.put("title", "寻ta有人想和你绑定");
-									json_push.put("msg", str_add_id + "请求和你绑定");
 									json_push.put("device_token", str_add_device_token);
+									json_push.put("id", str_add_id);
+									json_push.put("name", userService.getUser(str_add_id).getName());
 									JPush.launch(json_push);
 
 									json_return.put("result", "1");
@@ -332,21 +332,20 @@ public class HelloServlet extends HttpServlet {
 					String str_confirm_device_token = class_get_user.getDevice_token();
 
 					JSONObject json_push = new JSONObject();
-					json_push.put("title", "寻ta绑定结果");
+					json_push.put("id", str_confirm_id);
+					json_push.put("name", str_confirm_name);
 					json_push.put("device_token", str_confirm_device_token);
 					if (str_confirm_agree.equals("1")) {
 						json_return.put("result", "1");
 
-						json_push.put("msg", str_confirm_id + "同意和你绑定");
-						//返回被绑定人的昵称和位置
-						json_push.put("name", str_confirm_name);
+						//返回被绑定人的位置
 						boolean found_loc = false;
 						for (Map.Entry entry : map_last_location.entrySet()) {
 							//找到该位置，返回位置信息
 							if (str_confirm_id.equals(entry.getKey().toString())) {
-								json_push.put("location", entry.getValue());
-								json_push.put("result", "1");
+								json_push.put("lacation", entry.getValue());
 								found_loc = true;
+
 								break;
 							}
 						}
@@ -357,7 +356,6 @@ public class HelloServlet extends HttpServlet {
 
 					} else {
 						json_return.put("result", "2");
-						json_push.put("msg", str_confirm_id + "不想和你绑定");
 					}
 					JPush.launch(json_push);
 				} else {
